@@ -4,18 +4,18 @@ const messageModel= new mongoose.Schema({
     senderId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        required:true,
+        required:true
     },
 
     receiverId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        required:true,
+        required:true
     },
 
     message:{
-        type:"string",
-        required:true,
+        type:String,
+        required:true
     }
-});
-export const Message=mongoose.model("Message",messageModel)
+},{timestamps:true});
+export const Message=mongoose.model("Message",messageModel);

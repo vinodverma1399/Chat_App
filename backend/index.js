@@ -1,15 +1,21 @@
 import express from "express";
 import dotenv from "dotenv";
-import connectDB from "./config/datbase.js"
+import { connectDB } from "./config/database.js";
+import userRoute from "./routes/userRoute.js";
 
 dotenv.config({});
 
+connectDB();
  
-const port = process.env.port || 5000;
+const PORT = process.env.PORT || 5000;
 
 const app=express();
+//middleware
+app.use(express.json());
+//routes
+app.use("/api/v1/user",userRoute);
+//http://localhost:8081/api/v1/user/register
 
-app.listen(port,()=>{
-    connectDB();
-    console.log(`server listen at port no ${port}`);
-}); 
+app.listen(PORT,()=>{
+    console.log(`server listen at port no ${PORT}`);
+});

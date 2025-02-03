@@ -1,26 +1,26 @@
-import mongoose from "mongoose"
-
- const userModel=new mongoose.schema({
+import mongoose from "mongoose";
+    
+ const userModel = new mongoose.Schema({
     fullName:{
         type:String,
-        required:true,
+        required:true
     },
 
     userName:{
         type:String,
         required:true,
-        unique:true,
+        unique:true
     },
 
-    Password:{
+    password:{
         type:String,
-        required:true,
+        required:true
     },
 
     gender:{
         type:String,
         enum:["male","female"],
-        required:true,
+        required:true
     },
 
     profilePhoto:{
@@ -28,6 +28,11 @@ import mongoose from "mongoose"
         default:""
     }
 
- });
+ },{timestamps:true});
 
- export const User =mongoose.model("User",userModel);
+
+ 
+
+ const User = mongoose.model("User", userModel);
+export default User;
+
