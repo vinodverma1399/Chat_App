@@ -22,15 +22,32 @@ export const sendMessage= async (req, res)=>{
         })
 
         if(newMessage){
-            gotConversation.message.push(newMessage._id)
+            gotConversation.messages.push(newMessage._id)
         };
         await gotConversation.save();
 
         //Soket IO
         return res.status(201).json({
             message:"message send successfully"
-        })
+        })  
     } catch (error) {
         console.error(error);
     }
 }
+
+
+ //get message
+
+ export const getMessage= async (req, res)=>{
+    try {
+        const receiverId=req.params.id;
+        const senderId=req.id;
+        const conversation=await Conversation.findOne({
+            participants:{$all:[senderId,receiverId]}
+        }).populate("messages"); 
+        //console.log(conversation.messages);
+        return res.status(200).json(conversation?.messages);
+    } catch (error) { 
+        console.error(error);
+    }
+ }
